@@ -20,7 +20,7 @@ async function main() {
 main();
 
 process.on("unhandledRejection", (err) => {
-  console.log(`😈 unahandledRejection is detected , shutting down ...`, err);
+  console.log(`unahandledRejection is detected, shutting down...`, err);
   if (server) {
     server.close(() => {
       process.exit(1);
@@ -30,6 +30,6 @@ process.on("unhandledRejection", (err) => {
 });
 
 process.on("uncaughtException", () => {
-  console.log(`😈 uncaughtException is detected , shutting down ...`);
+  console.log(`uncaughtException is detected, shutting down...`);
   process.exit(1);
 });
