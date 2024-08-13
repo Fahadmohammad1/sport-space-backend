@@ -22,4 +22,6 @@ router.delete(
   FacilityController.deleteFacility
 );
 
+router.get("/", FacilityController.getAllFacilities);
+
 export const FacilityRoutes = router;
