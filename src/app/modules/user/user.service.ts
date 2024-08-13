@@ -8,19 +8,11 @@ import config from "../../config";
 
 // register
 const createUser = async (user: IUser) => {
-  // const { email, role } = user;
-
   const createdUser = await User.create(user);
 
   if (!createdUser) {
     throw new ApiError(httpStatus.BAD_REQUEST, "Failed to create user account");
   }
-
-  // const accessToken = jwtHelpers.createToken(
-  //   { email, role },
-  //   config.jwt as Secret,
-  //   config.jwt_expires_in as string
-  // );
 
   return createdUser;
 };
