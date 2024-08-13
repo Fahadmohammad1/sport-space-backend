@@ -37,7 +37,28 @@ const updateFacility = async (
   return updatedFacility;
 };
 
+const deleteFacility = async (facilityId: string) => {
+  const isFacilityExist = await Facility.findOne({ _id: facilityId });
+
+  if (!isFacilityExist) {
+    throw new ApiError(httpStatus.NOT_FOUND, "Facility not found");
+  }
+
+  const updatedFacility = await Facility.findByIdAndUpdate(
+    facilityId,
+    { isDeleted: true },
+    { new: true }
+  );
+
+  if (!updatedFacility) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "Failed to delete the facility");
+  }
+
+  return updatedFacility;
+};
+
 export const FacilityService = {
   createFacility,
   updateFacility,
+  deleteFacility,
 };

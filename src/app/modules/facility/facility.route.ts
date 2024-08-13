@@ -16,4 +16,10 @@ router.put(
   FacilityController.updateFacility
 );
 
+router.delete(
+  "/:id",
+  auth(ENUM_USER_ROLES.ADMIN),
+  FacilityController.deleteFacility
+);
+
 export const FacilityRoutes = router;
