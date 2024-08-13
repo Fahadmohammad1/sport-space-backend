@@ -3,21 +3,21 @@ import cors from "cors";
 import express, { Application, Request, Response } from "express";
 import notFound from "./app/middlewares/notFound";
 import globalErrorHandler from "./app/middlewares/globalErrorHandler";
-// import router from './app/routes';
+import router from "./app/routes";
 
 const app: Application = express();
 
-//parsers
+//parser
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(cors({ origin: ["http://localhost:3000"], credentials: true }));
+app.use(cors());
 
 // app routes
-// app.use('/api/v1', router);
+app.use("/api", router);
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hi Next Level Developer !");
+  res.send("Api is Working fine !");
 });
 
 app.use(globalErrorHandler);

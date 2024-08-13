@@ -7,8 +7,8 @@ import { jwtHelpers } from "../../helpers/jwtHelper";
 import config from "../../config";
 
 // register
-const createUser = async (user: IUser): Promise<{ accessToken: string }> => {
-  const { email, role } = user;
+const createUser = async (user: IUser) => {
+  // const { email, role } = user;
 
   const createdUser = await User.create(user);
 
@@ -16,19 +16,17 @@ const createUser = async (user: IUser): Promise<{ accessToken: string }> => {
     throw new ApiError(httpStatus.BAD_REQUEST, "Failed to create user account");
   }
 
-  const accessToken = jwtHelpers.createToken(
-    { email, role },
-    config.jwt as Secret,
-    config.jwt_expires_in as string
-  );
+  // const accessToken = jwtHelpers.createToken(
+  //   { email, role },
+  //   config.jwt as Secret,
+  //   config.jwt_expires_in as string
+  // );
 
-  return { accessToken };
+  return createdUser;
 };
 
 // login
-const loginUser = async (
-  user: Partial<IUser>
-): Promise<{ accessToken: string }> => {
+const loginUser = async (user: Partial<IUser>) => {
   const { email, password } = user;
 
   const isUserExist = await User.findOne({ email });
@@ -47,10 +45,10 @@ const loginUser = async (
     config.jwt_expires_in as string
   );
 
-  return { accessToken };
+  return { accessToken, isUserExist };
 };
 
-export const AuthService = {
+export const UserService = {
   createUser,
   loginUser,
 };
