@@ -13,6 +13,31 @@ const createFacility = async (facilityInfo: TFacility) => {
   return createdFacility;
 };
 
+// update facility
+const updateFacility = async (
+  facilityId: string,
+  facilityInfo: Partial<TFacility>
+) => {
+  const isFacilityExist = await Facility.findOne({ _id: facilityId });
+
+  if (!isFacilityExist) {
+    throw new ApiError(httpStatus.NOT_FOUND, "Facility not found");
+  }
+
+  const updatedFacility = await Facility.findByIdAndUpdate(
+    facilityId,
+    facilityInfo,
+    { new: true }
+  );
+
+  if (!updatedFacility) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "Failed to update the facility");
+  }
+
+  return updatedFacility;
+};
+
 export const FacilityService = {
   createFacility,
+  updateFacility,
 };

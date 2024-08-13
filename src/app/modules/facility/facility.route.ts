@@ -10,5 +10,10 @@ router.post(
   auth(ENUM_USER_ROLES.ADMIN),
   FacilityController.createFacility
 );
+router.put(
+  "/:id",
+  auth(ENUM_USER_ROLES.ADMIN),
+  FacilityController.updateFacility
+);
 
 export const FacilityRoutes = router;
