@@ -15,14 +15,23 @@ const bookingSchema = new Schema<TBooking>(
       type: String,
       required: true,
     },
+    user: {
+      type: String,
+      required: true,
+      ref: "User",
+    },
     facility: {
       type: String,
       required: true,
-      ref: "user",
+      ref: "Facility",
+    },
+    payableAmount: {
+      type: Number,
+      required: true,
     },
     isBooked: {
       type: String,
-      default: "unconfirmed",
+      default: "confirmed",
     },
   },
   {
