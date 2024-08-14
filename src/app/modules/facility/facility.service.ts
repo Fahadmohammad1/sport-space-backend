@@ -59,7 +59,7 @@ const deleteFacility = async (facilityId: string) => {
 
 // get all facilities
 const getAllFacilities = async () => {
-  return await Facility.find({});
+  return await Facility.find({ isDeleted: false });
 };
 
 export const FacilityService = {

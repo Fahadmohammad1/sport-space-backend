@@ -32,7 +32,7 @@ const loginUser = async (user: Partial<IUser>) => {
   }
 
   const accessToken = jwtHelpers.createToken(
-    { email, role: isUserExist.role },
+    { email, role: isUserExist.role, id: isUserExist.id },
     config.jwt as Secret,
     config.jwt_expires_in as string
   );

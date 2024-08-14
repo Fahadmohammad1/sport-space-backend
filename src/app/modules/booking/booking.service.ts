@@ -38,6 +38,41 @@ const createBooking = async (user: JwtPayload, bookingInfo: TBooking) => {
   return createdBooking;
 };
 
+// find all bookings
+
+const getAllBookings = async () => {
+  return await Booking.find({});
+};
+
+// cancel a booking
+const cancelBooking = async (bookingId: string, userInfo: JwtPayload) => {
+  const isBookingExist = await Booking.findOne({ _id: bookingId }).populate(
+    "user"
+  );
+
+  if (!isBookingExist) {
+    throw new ApiError(httpStatus.NOT_FOUND, "Booking not found");
+  }
+
+  if (isBookingExist && isBookingExist.user !== userInfo.id) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, "Unauthorized access");
+  }
+
+  const deletedBooking = await Booking.findByIdAndUpdate(
+    bookingId,
+    { isBooked: "canceled" },
+    { new: true }
+  );
+
+  if (!deletedBooking) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "Failed to cancel the booking");
+  }
+
+  return deletedBooking;
+};
+
 export const BookingService = {
   createBooking,
+  getAllBookings,
+  cancelBooking,
 };

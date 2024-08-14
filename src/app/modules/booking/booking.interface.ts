@@ -1,4 +1,4 @@
-export type TBookingStatus = "confirmed" | "unconfirmed" | "other";
+export type TBookingStatus = "confirmed" | "unconfirmed" | "canceled";
 
 export type TBooking = {
   date: string;

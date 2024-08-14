@@ -12,7 +12,7 @@ export default tseslint.config(
             "no-unused-vars": "warn",
             "no-undef": "error",
             "@typescript-eslint/no-var-requires": 0,
-            "no-console": "error"
+            // "no-console": "error"
         },
     }
 );

@@ -22,7 +22,10 @@ const auth =
       req.user = verifiedUser;
 
       if (requiredRoles.length && !requiredRoles.includes(verifiedUser.role)) {
-        throw new ApiError(httpStatus.FORBIDDEN, "Forbidded Access");
+        throw new ApiError(
+          httpStatus.FORBIDDEN,
+          "You have no access to this route"
+        );
       }
       next();
     } catch (error) {
