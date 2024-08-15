@@ -46,8 +46,19 @@ const cancelBooking = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, 
         data: result,
     });
 }));
+const checkAvailableSlots = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const date = req.query.date || new Date().toISOString().slice(0, 10);
+    const result = yield booking_service_1.BookingService.checkAvailableSlots(date);
+    (0, sendResponse_1.default)(res, {
+        success: true,
+        statusCode: 200,
+        message: "Availabe slots retrieved successfully",
+        data: result,
+    });
+}));
 exports.BookingController = {
     createBooking,
     getAllBookings,
     cancelBooking,
+    checkAvailableSlots,
 };

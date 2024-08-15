@@ -58,8 +58,14 @@ const cancelBooking = (bookingId, userInfo) => __awaiter(void 0, void 0, void 0,
     }
     return deletedBooking;
 });
+// check available slots
+const checkAvailableSlots = (date) => __awaiter(void 0, void 0, void 0, function* () {
+    const getBookings = yield booking_model_1.default.find({ date });
+    return (0, booking_utils_1.getAllAvailableSlots)(getBookings);
+});
 exports.BookingService = {
     createBooking,
     getAllBookings,
     cancelBooking,
+    checkAvailableSlots,
 };
