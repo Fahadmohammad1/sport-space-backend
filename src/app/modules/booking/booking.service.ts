@@ -5,7 +5,7 @@ import Booking from "./booking.model";
 import Facility from "../facility/facility.model";
 import { JwtPayload } from "jsonwebtoken";
 import User from "../user/user.model";
-import { calculatePayableAmount } from "./booking.utils";
+import { calculatePayableAmount, getAllAvailableSlots } from "./booking.utils";
 
 const createBooking = async (user: JwtPayload, bookingInfo: TBooking) => {
   // finding the user by provided user id
@@ -71,8 +71,16 @@ const cancelBooking = async (bookingId: string, userInfo: JwtPayload) => {
   return deletedBooking;
 };
 
+// check available slots
+const checkAvailableSlots = async (date: string) => {
+  const getBookings = await Booking.find({ date });
+
+  return getAllAvailableSlots(getBookings);
+};
+
 export const BookingService = {
   createBooking,
   getAllBookings,
   cancelBooking,
+  checkAvailableSlots,
 };

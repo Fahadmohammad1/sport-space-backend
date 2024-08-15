@@ -7,15 +7,21 @@ import { BookingValidation } from "./booking.validation";
 
 const router = express.Router();
 
+router.get("/check-availability", BookingController.checkAvailableSlots);
+
 router.post(
-  "/",
+  "/bookings",
   auth(ENUM_USER_ROLES.USER),
   validateRequest(BookingValidation.bookingZodSchema),
   BookingController.createBooking
 );
-router.get("/", auth(ENUM_USER_ROLES.ADMIN), BookingController.getAllBookings);
+router.get(
+  "/bookings",
+  auth(ENUM_USER_ROLES.ADMIN),
+  BookingController.getAllBookings
+);
 router.delete(
-  "/:id",
+  "/bookings/:id",
   auth(ENUM_USER_ROLES.USER),
   BookingController.cancelBooking
 );

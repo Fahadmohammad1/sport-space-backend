@@ -40,8 +40,23 @@ const cancelBooking = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const checkAvailableSlots = catchAsync(async (req: Request, res: Response) => {
+  const date =
+    (req.query.date as string) || new Date().toISOString().slice(0, 10);
+
+  const result = await BookingService.checkAvailableSlots(date);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "Availabe slots retrieved successfully",
+    data: result,
+  });
+});
+
 export const BookingController = {
   createBooking,
   getAllBookings,
   cancelBooking,
+  checkAvailableSlots,
 };
