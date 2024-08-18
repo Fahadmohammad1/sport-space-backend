@@ -33,15 +33,23 @@ export const getAllAvailableSlots = (bookings: TBooking[]) => {
       startTime: "14:00",
       endTime: "16:00",
     },
+    {
+      startTime: "17:00",
+      endTime: "20:00",
+    },
+    {
+      startTime: "21:00",
+      endTime: "24:00",
+    },
   ];
 
   bookings.forEach((booking) => {
-    dailySlots.forEach((slot, index) => {
+    dailySlots.forEach((slot, i) => {
       if (
         booking.startTime <= slot.endTime &&
         booking.endTime >= slot.startTime
       ) {
-        dailySlots.splice(index, 1);
+        dailySlots.splice(i, 1);
       }
     });
   });
