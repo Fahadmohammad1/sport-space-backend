@@ -1,5 +1,7 @@
 ## This is the backend repository of SportSpace web application
 
+This a sports facility booking platform. Where any authenticated user can book any kind of sports facilty. For example : Football field, Tennis court etc. The purpose of the project is to make the booking process of sports facility esier.
+
 ### Getting Started
 
 1. Clone the Repository:
